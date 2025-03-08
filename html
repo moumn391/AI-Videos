@@ -4,48 +4,161 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Video Generator</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+            transition: background 0.3s, color 0.3s;
+        }
+        .hero {
+            background: url('https://source.unsplash.com/1600x900/?technology,ai') center/cover no-repeat;
+            color: white;
+            padding: 100px 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s;
+        }
+        .dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+        .dark-mode .container {
+            background: #1e1e1e;
+        }
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #007bff;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            margin: 0 15px;
+        }
+        .nav a:hover {
+            text-decoration: underline;
+        }
+        .btn-toggle {
+            cursor: pointer;
+        }
+        footer {
+            margin-top: 30px;
+            padding: 20px;
+            background: #007bff;
+            color: white;
+        }
+        .video-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .video-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .dark-mode .video-card {
+            background: #1e1e1e;
+        }
+    </style>
 </head>
 <body>
     <div class="nav">
-        <a href="#">Home</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-        <a href="#login">Login</a>
-    </div>
-
-    <div class="container">
-        <h1>AI Video Generator</h1>
-        <p>Generate high-quality AI-powered videos in seconds!</p>
-        
-        <button onclick="toggleDarkMode()" aria-label="Toggle Dark Mode">Toggle Dark Mode</button>
-        
         <div>
-            <input type="text" id="videoPrompt" placeholder="Enter your video idea...">
-            <button onclick="generateVideo()" aria-label="Generate Video">Generate Video</button>
-            <div id="loading" style="display:none;">Loading...</div>
+            <a href="#">Home</a>
+            <a href="#about">About</a>
+            <a href="#videos">Videos</a>
+            <a href="#contact">Contact</a>
+            <a href="#login">Login</a>
         </div>
-        
-        <p id="output" style="margin-top: 20px;"></p>
+        <i class="fas fa-moon btn-toggle" onclick="toggleDarkMode()"></i>
     </div>
 
-    <div id="about" class="container">
+    <section class="hero">
+        <h1>AI Video Generator</h1>
+        <p>Create AI-powered videos in seconds with cutting-edge technology!</p>
+    </section>
+
+    <div class="container mt-4">
+        <h2>Generate Video</h2>
+        <p>Enter your idea and let AI generate your video instantly.</p>
+        <input type="text" id="videoPrompt" class="form-control" placeholder="Enter your video idea...">
+        <button class="btn btn-success mt-3" onclick="generateVideo()">Generate Video</button>
+        <p id="output" class="mt-3"></p>
+    </div>
+
+    <div id="videos" class="container mt-4">
+        <h2>Generated Videos</h2>
+        <div class="video-gallery" id="videoGallery"></div>
+    </div>
+
+    <div id="about" class="container mt-4">
         <h2>About Us</h2>
         <p>This AI Video Generator helps you create stunning videos using artificial intelligence.</p>
     </div>
 
-    <div id="contact" class="container">
+    <div id="contact" class="container mt-4">
         <h2>Contact Us</h2>
         <p>Email: support@aivideogenerator.com</p>
     </div>
 
-    <div id="login" class="container">
+    <div id="login" class="container mt-4">
         <h2>Login</h2>
-        <input type="text" id="username" placeholder="Enter username">
-        <input type="password" id="password" placeholder="Enter password">
-        <button onclick="login()" aria-label="Login">Login</button>
+        <input type="text" id="username" class="form-control" placeholder="Enter username">
+        <input type="password" id="password" class="form-control mt-2" placeholder="Enter password">
+        <button class="btn btn-primary mt-2" onclick="login()">Login</button>
     </div>
 
-    <script src="scripts.js" defer></script>
+    <footer>
+        <p>&copy; 2025 AI Video Generator. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        function generateVideo() {
+            let prompt = document.getElementById('videoPrompt').value;
+            if (prompt) {
+                let videoGallery = document.getElementById('videoGallery');
+                let videoCard = document.createElement('div');
+                videoCard.classList.add('video-card');
+                videoCard.innerHTML = `<p>Video: "${prompt}"</p><video controls width="100%"><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>`;
+                videoGallery.appendChild(videoCard);
+                document.getElementById('output').innerText = `Generating video for: "${prompt}"...`;
+            } else {
+                alert("Please enter a video idea!");
+            }
+        }
+
+        function login() {
+            let username = document.getElementById('username').value;
+            let password = document.getElementById('password').value;
+            if (username && password) {
+                alert("Login successful! Feature coming soon.");
+            } else {
+                alert("Please enter valid credentials.");
+            }
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
