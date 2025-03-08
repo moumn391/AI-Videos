@@ -7,9 +7,13 @@ function generateVideo() {
     if (prompt) {
         document.getElementById('output').innerText = `Generating video for: "${prompt}"...`;
         document.getElementById('loading').style.display = 'block';
-        // Simulate video generation
         setTimeout(() => {
             document.getElementById('loading').style.display = 'none';
+            let videoGallery = document.getElementById('videoGallery');
+            let videoCard = document.createElement('div');
+            videoCard.classList.add('video-card');
+            videoCard.innerHTML = `<p>Video: "${prompt}"</p><video controls width="100%"><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>`;
+            videoGallery.appendChild(videoCard);
             document.getElementById('output').innerText = `Video generated for: "${prompt}"`;
         }, 3000);
     } else {
