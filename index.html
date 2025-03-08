@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Video Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+            transition: background 0.3s, color 0.3s;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+        .dark-mode .container {
+            background: #1e1e1e;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Video Generator</h1>
+        <p>Generate high-quality AI-powered videos in seconds!</p>
+        
+        <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+        
+        <div>
+            <input type="text" id="videoPrompt" placeholder="Enter your video idea...">
+            <button onclick="generateVideo()">Generate Video</button>
+        </div>
+        
+        <p id="output" style="margin-top: 20px;"></p>
+    </div>
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        function generateVideo() {
+            let prompt = document.getElementById('videoPrompt').value;
+            if (prompt) {
+                document.getElementById('output').innerText = `Generating video for: "${prompt}"...`;
+            } else {
+                alert("Please enter a video idea!");
+            }
+        }
+    </script>
+</body>
+</html>
