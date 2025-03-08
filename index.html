@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,9 +49,29 @@
         .dark-mode .container {
             background: #1e1e1e;
         }
+        .nav {
+            display: flex;
+            justify-content: space-around;
+            background: #007bff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
     </style>
 </head>
 <body>
+    <div class="nav">
+        <a href="#">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="#login">Login</a>
+    </div>
+
     <div class="container">
         <h1>AI Video Generator</h1>
         <p>Generate high-quality AI-powered videos in seconds!</p>
@@ -65,6 +86,23 @@
         <p id="output" style="margin-top: 20px;"></p>
     </div>
 
+    <div id="about" class="container">
+        <h2>About Us</h2>
+        <p>This AI Video Generator helps you create stunning videos using artificial intelligence.</p>
+    </div>
+
+    <div id="contact" class="container">
+        <h2>Contact Us</h2>
+        <p>Email: support@aivideogenerator.com</p>
+    </div>
+
+    <div id="login" class="container">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Enter username">
+        <input type="password" id="password" placeholder="Enter password">
+        <button onclick="login()">Login</button>
+    </div>
+
     <script>
         function toggleDarkMode() {
             document.body.classList.toggle('dark-mode');
@@ -76,6 +114,16 @@
                 document.getElementById('output').innerText = `Generating video for: "${prompt}"...`;
             } else {
                 alert("Please enter a video idea!");
+            }
+        }
+
+        function login() {
+            let username = document.getElementById('username').value;
+            let password = document.getElementById('password').value;
+            if (username && password) {
+                alert("Login successful! Feature coming soon.");
+            } else {
+                alert("Please enter valid credentials.");
             }
         }
     </script>
